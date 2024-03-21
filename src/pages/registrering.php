@@ -1,22 +1,22 @@
 <?php
-require_once "config.php";
+require_once "../../server/config.php";
 
 
-$navn = $username = $password = $confirm_password = "";
+$fornavn = $etternavn = $epost = $passord = $confirm_password = "";
 $navn_err = $username_err = $password_err = $confirm_password_err = "";
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    if (empty(trim($_POST["username"]))) {
+    if (empty(trim($_POST["epost"]))) {
         $username_err = "skriv in et navn.";
     } else {
      
-        $sql = "SELECT id FROM login WHERE navn = ?";
+        $sql = "SELECT kundeid FROM kunde WHERE epost = ?";
 
         if ($stmt = $link->prepare($sql)) {
-            $stmt->bind_param("s", $param_navn);
-            $param_navn = trim($_POST["navn"]);
+            $stmt->bind_param("s", $param_epost);
+            $param_epost = trim($_POST["epost"]);
 
             if ($stmt->execute()) {
                 $stmt->store_result();
@@ -24,33 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 if ($stmt->num_rows == 1) {
                     $navn_err = "Dette navnet er alerede i bruk.";
                 } else {
-                    $navn = trim($_POST["navn"]);
-                }
-            } else {
-                echo "Something went wrong. Please try again later.";
-            }
-
-            $stmt->close();
-        }
-    }
-  
-    if (empty(trim($_POST["username"]))) {
-        $username_err = "skriv in et brukernavn";
-    } else {
-      
-        $sql = "SELECT id FROM login WHERE bruker = ?";
-
-        if ($stmt = $link->prepare($sql)) {
-            $stmt->bind_param("s", $param_username);
-            $param_username = trim($_POST["username"]);
-
-            if ($stmt->execute()) {
-                $stmt->store_result();
-
-                if ($stmt->num_rows == 1) {
-                    $username_err = "Dette brukernavnet er alerede i bruk.";
-                } else {
-                    $username = trim($_POST["username"]);
+                    $epost = trim($_POST["epost"]);
                 }
             } else {
                 echo "Something went wrong. Please try again later.";
@@ -61,12 +35,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
   
-    if (empty(trim($_POST["password"]))) {
+    if (empty(trim($_POST["passord"]))) {
         $password_err = "skriv in et passord.";
-    } elseif (strlen(trim($_POST["password"])) < 6) {
+    } elseif (strlen(trim($_POST["passord"])) < 6) {
         $password_err = "Passordet må ha i hvert fall 6 tegn.";
     } else {
-        $password = trim($_POST["password"]);
+        $password = trim($_POST["passord"]);
     }
 
     if (empty(trim($_POST["confirm_password"]))) {
@@ -81,10 +55,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
    
     if (empty($username_err) && empty($password_err) && empty($confirm_password_err)) {
       
-        $sql = "INSERT INTO login (navn, bruker, passord, total, ubetalt, admin) VALUES (?, ?, ?, 0, 0, 'no')";
+        $sql = "INSERT INTO kunde (epost, passord, fornavn, etternavn) VALUES (?, ?, ?, ?)";
 
         if ($stmt = $link->prepare($sql)) {
-            $stmt->bind_param("sss", $param_navn, $param_username, $param_password);
+            $stmt->bind_param("ssss", $param_epost, $param_password, $_POST['fornavn'], $_POST['etternavn']);
             $param_navn = $navn;
             $param_username = $username;
             $param_password = $password;
@@ -111,39 +85,45 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <title>Registration</title>
-    <?php
-    include "css.php";
-    ?>
+    <link rel="stylesheet" href="../styles/style.css">
     <link rel="icon" type="image/x-icon" href="assets/jpg/linje5.jpg">
 </head>
 
 <body>
-    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?> " method="post" class="registrer-form">
+    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" class="registrer-form">
         <div class="imgcontainer">
           <img src="assets/jpg/Linje5.jpg" alt="linje5" class="avatar">
         </div>
           <h2>Register</h2>
           <div>
-                <label>Navn</label>
-                <input type="text" name="navn" placeholder="Skriv in navnet ditt"
+                <label>Fornavn</label>
+                <input type="text" name="fornavn" placeholder="Skriv in navnet ditt"
                     class="form-control <?php echo (!empty($navn_err)) ? 'is-invalid' : ''; ?>"
-                    value="<?php echo $username; ?>">
+                    value="<?php echo $fornavn; ?>">
+                <span class="invalid-feedback">
+                    <?php echo $username_err; ?>
+                </span>
+
+                <label>Etternavn</label>
+                <input type="text" name="etternavn" placeholder="Skriv in navnet ditt"
+                    class="form-control <?php echo (!empty($navn_err)) ? 'is-invalid' : ''; ?>"
+                    value="<?php echo $etternavn; ?>">
                 <span class="invalid-feedback">
                     <?php echo $username_err; ?>
                 </span>
           
-                <label>Brukernavn</label>
-                <input type="text" name="username" placeholder="Lag et Brukernavn"
+                <label>Epost</label>
+                <input type="text" name="epost" placeholder="Skriv in eposten din"
                     class="form-control <?php echo (!empty($username_err)) ? 'er feil' : ''; ?>"
-                    value="<?php echo $username; ?>">
+                    value="<?php echo $epost; ?>">
                 <span class="invalid-feedback">
                     <?php echo $username_err; ?>
                 </span>
             
                 <label>Passord</label>
-                <input type="password" name="password" placeholder="Lag et Passord"
+                <input type="password" name="passord" placeholder="Lag et Passord"
                     class="form-control <?php echo (!empty($password_err)) ? 'er feil' : ''; ?>"
-                    value="<?php echo $password; ?>">
+                    value="<?php echo $passord; ?>">
                 <span class="invalid-feedback">
                     <?php echo $password_err; ?>
                 </span>

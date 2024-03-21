@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require_once "config.php";
+require_once "../../server/config.php";
    
 
 
@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
        
         if (empty($username_err) && empty($password_err)) {
            
-            $sql = "SELECT id, navn, bruker, passord, admin FROM login WHERE bruker = '" . $username . "' ";
+            $sql = "SELECT kundeid, epost, passord, fornavn, etternavn FROM kunde WHERE epost = '" . $username . "' ";
 
             if ($stmt = $link->prepare($sql)) {
 
@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                     $stmt->store_result();
 
                     if ($stmt->num_rows == 1) {
-                        $stmt->bind_result($id, $navn, $username, $password, $admin);
+                        $stmt->bind_result($id, $epost, $passord, $fornavn, $etternavn);
 
                         if ($stmt->fetch()) {
                             if (password_verify($password, $hashed_password)) {
@@ -45,17 +45,17 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                                
                                 $_SESSION["loggedin"] = true;
                                 $_SESSION["id"] = $id;
-                                $_SESSION["navn"] = $navn;
-                                $_SESSION["bruker"] = $username;
-                                $_SESSION["passord"] = $password;
-                                $_SESSION["admin"] = $admin;
+                                $_SESSION["epost"] = $epost;
+                                $_SESSION["passord"] = $passord;
+                                $_SESSION["passord"] = $fornavn;
+                                $_SESSION["admin"] = $etternavn;
                                 
                                 if (isset($_GET["remember_me"]) && $_GET["remember_me"] == "on") {
                                     
-                                    setcookie("bruker", $username, time() + 3600 * 24 * 30, "/"); 
-                                    setcookie("pass", $password, time() + 3600 * 24 * 30, "/");
+                                    setcookie("epost", $epost, time() + 3600 * 24 * 30, "/"); 
+                                    setcookie("passord", $passord, time() + 3600 * 24 * 30, "/");
                                 }
-                                header("location: index.php");
+                                header("location: ../../index.php");
                                 exit();
                             } else {
                                 $password_err = "Passordet er feil.";
@@ -79,13 +79,25 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 <head>
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bot system Linje-5</title>
-    <?php
-    include "css.php";
-    ?>
+    <title>Login</title>
+    <link rel="stylesheet" href="../styles/style.css">
     <link rel="icon" type="image/x-icon" href="assets/jpg/linje5.jpg">
 </head>
 <body>
+    <ul>
+        <li><a href="../../index.php">Hjem</a></li>
+        <?php
+        if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
+            echo '
+            <li><a href="../components/logut.php">Log ut</a></li>
+            <li><a href="../pages/minside.php">Mine Tickets</a></li>
+            ';
+        } else {
+            echo '<li><a href="../pages/login.php">Login</a></li>';
+        }
+        ?> 
+    </ul>
+
     <form action="<?=$_SERVER['PHP_SELF'];?>" method="GET" class="form-group">
         <div class="imgcontainer">
           <img src="assets/jpg/Linje5.jpg" alt="linje5" class="avatar">

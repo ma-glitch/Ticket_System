@@ -1,0 +1,233 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+.ticket-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header{
+    text-align: center;
+    margin: 20px;
+}
+
+.ticket-form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.ticket-form label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.ticket-form input[type="text"],
+.ticket-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.ticket-form textarea {
+    height: 100px;
+}
+
+.ticket-form input[type="submit"] {
+    background-color: #4caf50;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.ticket-form input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+/* Logged in */
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 20px;
+}
+
+ul li {
+    display: inline;
+    margin-right: 10px;
+}
+
+a {
+    text-decoration: none;
+    color: #333;
+}
+
+a:hover {
+    color: #666;
+}
+
+.form-group {
+    width: 300px;
+    margin: auto;
+    margin-top: 50px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.imgcontainer {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.containerlogin {
+    padding: 16px;
+}
+
+.containerlogin label {
+    font-weight: bold;
+}
+
+.containerlogin input[type="text"],
+.containerlogin input[type="password"] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+#loginbtn {
+    background-color: #4caf50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+}
+
+#loginbtn:hover {
+    background-color: #45a049;
+}
+
+.wrapperlog {
+    padding: 16px;
+    text-align: center;
+    background-color: #f1f1f1;
+}
+
+.psw {
+    color: #666;
+    margin: 0 10px;
+}
+
+.error {
+    color: red;
+    text-align: center;
+    margin-top: 10px;
+}
+
+
+/*  Registrering */
+
+.registrer-form {
+    width: 300px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+}
+
+.registrer-form h2 {
+    text-align: center;
+}
+
+.registrer-form label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.registrer-form input[type="text"],
+.registrer-form input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-sizing: border-box;
+}
+
+.registrer-form .invalid-feedback {
+    color: red;
+    font-size: 12px;
+}
+
+.regbtn {
+    margin-top: 20px;
+}
+
+.registrer-form input[type="submit"],
+.registrer-form input[type="reset"] {
+    width: 49%;
+    padding: 10px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.registrer-form input[type="submit"]:hover,
+.registrer-form input[type="reset"]:hover {
+    background-color: #0056b3;
+}
+
+.registrer-form p {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.registrer-form p a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.registrer-form p a:hover {
+    text-decoration: underline;
+}
+
+.imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+}
+
+.avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto;
+}
