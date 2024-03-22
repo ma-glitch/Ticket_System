@@ -31,7 +31,7 @@ session_start();
     <div class="ticket-form">
         <h2>Send Ticket</h2>
         <form action="/src/components/ticket.php" method="post">
-            <label for="name">Navn:</label>
+            <label for="name">Fullt Navn:</label>
             <input type="text" id="name" name="navn" required>
             <?php
             if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true){

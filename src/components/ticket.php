@@ -10,12 +10,41 @@ require 'phpmailer/src/SMTP.php';
 
 require_once("../../server/config.php");
 
+mysqli_set_charset($link, 'utf8');
+
+header('Content-Type: text/html; charset=utf-8');
+
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-     
     $navn = $_POST['navn'];
     $beskrivelse = $_POST['beskrivelse'];
     $problem = $_POST['problem'];
     $epost = $_POST['epost'];
+
+
+    $name_parts = explode(" ", $navn);
+    
+    $first_name = $name_parts[0]; 
+    $last_name =  $name_parts[1];
+
+    $default = 'default';
+
+    if (!isset($_SESSION['id'])) {
+        $sql_new_user = "INSERT INTO kunde (epost, passord, fornavn, etternavn) VALUES (?, ?, ?, ?)";
+        $stmt_new_user = $link->prepare($sql_new_user);
+        $stmt_new_user->bind_param("ssss", $epost, $default, $first_name, $last_name);
+
+        if ($stmt_new_user->execute()) {
+            
+            $new_user_id = $link->insert_id;
+           
+            $_SESSION['id'] = $new_user_id;
+        } else {
+            echo "Error creating new user: " . $stmt_new_user->error;
+            exit;
+        }
+    }
+
 
     
     $sql = "INSERT INTO Ticket (`kundeid`, `beskrivelse`, `ansattid`, `status`, `dato`) 
@@ -45,11 +74,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $mail->SMTPSecure = 'ssl';
             $mail->Port = 465;
 
-            $mail->setFrom('testdex68@gmail.com');
+            $mail->setFrom('testdex38@gmail.com');
             $mail->addAddress($epost);
             $mail->isHTML(true);
 
-            $mail->Subject = 'Bekreftelse på support ticket: ' . $ticketid;
+            $mail->Subject = 'Bekreftelse support ticket: ' . $ticketid;
             $mail-> Body = "Hei, ". $navn . ",<br>
             <br>
             Dette er en bekreftelse på at vi har mottatt din henvendelse vedrørende følgende sak:<br>
