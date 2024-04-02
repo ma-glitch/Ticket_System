@@ -20,6 +20,7 @@ session_start();
             echo '
             <li><a href="src/components/logut.php">Log ut</a></li>
             <li><a href="src/pages/minside.php">Mine Tickets</a></li>
+            <li><a href="src/pages/admin.php">Admin</a></li>
             ';
         } else {
             echo '<li><a href="src/pages/login.php">Login</a></li>';

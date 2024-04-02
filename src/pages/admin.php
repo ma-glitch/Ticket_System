@@ -8,7 +8,8 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mine tickets</title>
+    <title>Admin side</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="../styles/style.css">
 </head>
 <body>
@@ -19,7 +20,8 @@ session_start();
             echo '
             <li><a href="../components/logut.php">Log ut</a></li>
             <li><a href="../pages/minside.php">Mine Tickets</a></li>
-            <li><a href="../pages/admin.php">Admin</a></li>';
+            <li><a href="../pages/admin.php">Admin</a></li>
+            ';
         } else {
             echo '<li><a href="../pages/login.php">Login</a></li>';
         }
@@ -49,7 +51,18 @@ session_start();
             echo '</div>';
             echo '<div class="ticket-status">';
             echo '<h4>Status:</h4>';
-            echo '<p>' . $row['status'] . '</p>';
+            echo '<div class"select">
+            <form method="post" name="selectform" action="../components/update_status.php">
+            <select name="status" id="select-status" onChange="this.form.submit()">
+              <option value="' . $row['status'] .  '">' . $row['status'] . '</option>
+              <option value="Aktiv">Aktiv</option>
+              <option value="Venter på bruker">Venter på bruker</option>
+              <option value="Venter på avdeling">Venter på avdeling</option>
+              <option value="Avsluttet">Avsluttet</option>
+            </select>
+            <input name="ticketId" type="hidden" value="'. $row['ticketid'] . '"/>
+            </form>
+            </div>';
             echo '</div>';
             echo '<div class="ticket-content">';
             echo '<h4>Innhold:</h4>';
@@ -66,5 +79,6 @@ session_start();
     ?>
     </div>
     </div>
+
 </body>
 </html>

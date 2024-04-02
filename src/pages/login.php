@@ -91,6 +91,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
             echo '
             <li><a href="../components/logut.php">Log ut</a></li>
             <li><a href="../pages/minside.php">Mine Tickets</a></li>
+            <li><a href="../pages/admin.php">Mine Tickets</a></li>
             ';
         } else {
             echo '<li><a href="../pages/login.php">Login</a></li>';

@@ -231,3 +231,73 @@ a:hover {
     overflow: hidden;
     margin: 0 auto;
 }
+
+
+/* min side */
+
+.ticket-wrapp{
+    display: flex;
+    justify-content: center;
+}
+
+.ticket-width{
+    max-width: 900px;
+}
+
+
+.egenticket {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+    width: 900px;
+    background-color: #f9f9f9;
+}
+
+
+.ticket-header {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.ticket-header h3 {
+    margin: 0;
+    color: #333;
+}
+
+.ticket-header p {
+    margin: 5px 0;
+    color: #666;
+}
+
+
+.ticket-details, .ticket-status, .ticket-content, .ticket-messages {
+    margin-bottom: 20px;
+}
+
+.ticket-details h4, .ticket-status h4, .ticket-content h4, .ticket-messages h4 {
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.ticket-details p, .ticket-status p, .ticket-content p, .ticket-messages p {
+    color: #666;
+}
+
+
+select{
+    
+        outline: 10px red;
+        border: 0;
+        box-shadow: none;
+        flex: 1;
+        padding: 0 1em;
+        color: #fff;
+        background-color: #2c3e50;
+        background-image: none;
+        cursor: pointer;
+        height: 40px;
+        width: 150px;
+        border-radius: 4px;
+}
