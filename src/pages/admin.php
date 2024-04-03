@@ -1,6 +1,8 @@
 <?php
 session_start();
  require_once('../../server/config.php'); 
+ 
+$link->set_charset("utf8mb4");
 
 ?>
 <!DOCTYPE html>
@@ -68,6 +70,31 @@ session_start();
             echo '<h4>Innhold:</h4>';
             echo '<p>' . $row['Innhold'] . '</p>';
             echo '</div>';
+            echo '<h4>Ansatt:</h4>';
+            echo '<div class"select">
+            <form method="post" name="selectform" action="../components/update_ansatt.php">
+            <select name="ansatt" id="select-status" onChange="this.form.submit()">
+              <option value="' . $row['ansattid'] .  '">'; 
+              if ($row['ansattid'] == 1) {
+                $sql = "SELECT * FROM Ansatt WHERE ansattid ='" . $row['ansattid'] . "'";
+    
+                $resultat = $link->query($sql);
+    
+                if ($resultat->num_rows > 0){
+                    while ($ansatt = $resultat->fetch_assoc()){
+                        echo $ansatt['fornavn'];
+                    }
+                }
+            } else {
+                echo $row['ansattid'];
+            }
+        echo '</option>
+              <option value="' . $_SESSION['id'] . '">Set ticket til deg selv</option>
+              <option value="nonassigned">nonasigned</option>
+            </select>
+            <input name="ticketId" type="hidden" value="'. $row['ticketid'] . '"/>
+            </form>
+            </div>';
             echo '<div class="ticket-messages">';
             echo '<h4>Messages:</h4>';
             echo '</div>';

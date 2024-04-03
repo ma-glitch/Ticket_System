@@ -3,12 +3,12 @@ session_start();
 require_once('../../server/config.php');
 
 
-if (isset($_POST['ticketId'], $_POST['status'])) {
+if (isset($_POST['ticketId'], $_POST['ansatt'])) {
     $ticketId = $_POST['ticketId'];
-    $newStatus = $_POST['status'];
+    $newStatus = $_POST['ansatt'];
 
 
-    $sql = "UPDATE Ticket SET status = ? WHERE ticketid = ?";
+    $sql = "UPDATE Ticket SET ansattid = ? WHERE ticketid = ?";
     $stmt = $link->prepare($sql);
     $stmt->bind_param("si", $newStatus, $ticketId);
     

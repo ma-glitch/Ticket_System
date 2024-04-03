@@ -47,8 +47,8 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                                 $_SESSION["id"] = $id;
                                 $_SESSION["epost"] = $epost;
                                 $_SESSION["passord"] = $passord;
-                                $_SESSION["passord"] = $fornavn;
-                                $_SESSION["admin"] = $etternavn;
+                                $_SESSION["fornavn"] = $fornavn;
+                                $_SESSION["etternavn"] = $etternavn;
                                 
                                 if (isset($_GET["remember_me"]) && $_GET["remember_me"] == "on") {
                                     

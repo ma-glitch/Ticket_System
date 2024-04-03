@@ -2,7 +2,9 @@
 session_start();
  require_once('server/config.php'); 
 
+ mysqli_set_charset($link, 'utf8');
 
+ header('Content-Type: text/html; charset=utf-8'); 
 ?>
 <!DOCTYPE html>
 <html lang="en">
