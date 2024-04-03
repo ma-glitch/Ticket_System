@@ -33,7 +33,7 @@ $link->set_charset("utf8mb4");
     <div class="ticket-wrapp">
         <div class='ticket-width'>
     <?php
-    $sql = "SELECT Ticket.ticketid, Ticket.kundeid, Ticket.dato, Ticket.beskrivelse, Ticket.status, Ticket.ansattid, Innhold_i_ticket.Innhold
+    $sql = "SELECT Ticket.ticketid, Ticket.kundeid, Ticket.dato, Ticket.beskrivelse, Ticket.status, Ticket.ansattid, Innhold_i_ticket.Innhold, kunde.epost, kunde.fornavn, kunde.etternavn
     FROM Ticket
     INNER JOIN Innhold_i_ticket ON Ticket.ticketid = Innhold_i_ticket.ticketid
     INNER JOIN Kunde ON Ticket.kundeid = Kunde.kundeid 
@@ -43,6 +43,7 @@ $link->set_charset("utf8mb4");
     if ($result->num_rows > 0){
         while ($row = $result->fetch_assoc()){
             echo '<div class="egenticket">';
+            echo '<div class="ticket-left">';
             echo '<div class="ticket-header">';
             echo '<h3>Ticket Nummmer: ' . $row['ticketid'] . '</h3>';
             echo '<p>Date: ' . $row['dato'] . '</p>';
@@ -99,6 +100,14 @@ $link->set_charset("utf8mb4");
             echo '<h4>Messages:</h4>';
             echo '</div>';
             echo '</div>';
+            echo '<div class="ticket-right">';
+                    echo '<h2>Kunde detaljer</h2>';
+                    echo '<p>Navn: ' . $row['fornavn'] . ' ' . $row['etternavn'] . '</p>';
+                    echo '<p>Epost: ' . $row['epost'] . '</p>';
+                    echo '</div>';
+            echo '</div>';
+            echo '</div>';
+            
         }
     } else {
         echo '<h1>Fant ingen tickets</h1>';
