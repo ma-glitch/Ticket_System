@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
        
         if (empty($username_err) && empty($password_err)) {
            
-            $sql = "SELECT kundeid, epost, passord, fornavn, etternavn FROM kunde WHERE epost = '" . $username . "' ";
+            $sql = "SELECT kundeid, epost, passord, fornavn, etternavn FROM Kunde WHERE epost = '" . $username . "' ";
 
             if ($stmt = $link->prepare($sql)) {
 

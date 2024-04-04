@@ -55,7 +55,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
    
     if (empty($username_err) && empty($password_err) && empty($confirm_password_err)) {
       
-        $sql = "INSERT INTO kunde (epost, passord, fornavn, etternavn) VALUES (?, ?, ?, ?)";
+        $sql = "INSERT INTO Kunde (epost, passord, fornavn, etternavn) VALUES (?, ?, ?, ?)";
 
         if ($stmt = $link->prepare($sql)) {
             $stmt->bind_param("ssss", $param_epost, $param_password, $_POST['fornavn'], $_POST['etternavn']);

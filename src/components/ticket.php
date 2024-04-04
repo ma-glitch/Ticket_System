@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $default = 'default';
 
     if (!isset($_SESSION['id'])) {
-        $sql_new_user = "INSERT INTO kunde (epost, passord, fornavn, etternavn) VALUES (?, ?, ?, ?)";
+        $sql_new_user = "INSERT INTO Kunde (epost, passord, fornavn, etternavn) VALUES (?, ?, ?, ?)";
         $stmt_new_user = $link->prepare($sql_new_user);
         $stmt_new_user->bind_param("ssss", $epost, $default, $first_name, $last_name);
 
