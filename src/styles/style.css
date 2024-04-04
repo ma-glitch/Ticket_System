@@ -238,20 +238,19 @@ a:hover {
 .ticket-wrapp{
     display: flex;
     justify-content: center;
-    flex-direction: column;
 }
 
 .ticket-width{
     max-width: 900px;
+    width: 100%;
 }
-
 
 .egenticket {
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 20px;
     margin-bottom: 20px;
-    width: 900px;
+    width: 100%;
     background-color: #f9f9f9;
     display: flex;
     justify-content: space-around;

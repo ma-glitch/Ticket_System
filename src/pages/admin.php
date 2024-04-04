@@ -88,7 +88,7 @@ $link->set_charset("utf8mb4");
                 }
             } else {
                 echo $row['ansattid'];
-            }
+            };
         echo '</option>
               <option value="' . $_SESSION['id'] . '">Set ticket til deg selv</option>
               <option value="nonassigned">nonasigned</option>
@@ -102,16 +102,16 @@ $link->set_charset("utf8mb4");
             echo '</div>';
             echo '<div class="ticket-right">';
                     echo '<h2>Kunde detaljer</h2>';
+                    echo '<p>Kunde id: ' . $row['kundeid'] . '</p>';
                     echo '<p>Navn: ' . $row['fornavn'] . ' ' . $row['etternavn'] . '</p>';
                     echo '<p>Epost: ' . $row['epost'] . '</p>';
-                    echo '</div>';
             echo '</div>';
             echo '</div>';
             
         }
     } else {
         echo '<h1>Fant ingen tickets</h1>';
-    }
+    };  
     ?>
     </div>
     </div>
