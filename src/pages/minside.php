@@ -93,15 +93,33 @@ session_start();
                <input name="ticketId" type="hidden" value="'. $row['ticketid'] . '"/>
                </form>
                </div>';
-               echo '<div class="ticket-messages">';
-               echo '<h4>Meldinger:</h4>';
-               echo '</div>';
+               echo '<div class="send-ticket">
+               <h4>Send melding:</h4>
+               <form method="post" action="../components/sendmelding.php">
+                   <textarea name="message" rows="4" cols="50" placeholder="Skriv melding her"></textarea>
+                   <input type="hidden" name="ticketId" value="'. $row['ticketid'] .'">
+                   <input type="submit" value="Send">
+                  </form>
+               </div>';
+               
                echo '</div>';
                echo '<div class="ticket-right">';
-                       echo '<h2>Kunde detaljer</h2>';
-                       echo '<p>Kunde id: ' . $row['kundeid'] . '</p>';
-                       echo '<p>Navn: ' . $row['fornavn'] . ' ' . $row['etternavn'] . '</p>';
-                       echo '<p>Epost: ' . $row['epost'] . '</p>';
+                       echo '<div class="ticket-messages">
+                    <h4>Meldinger:</h4>
+                    ';
+                        $sql = "SELECT melding FROM Meldinger_i_sak WHERE ticketid = '" . $row['ticketid'] . "'";
+            
+                        $resultat = $link->query($sql);
+            
+                        if ($resultat->num_rows > 0){
+                            while ($messages = $resultat->fetch_assoc()){
+                                echo $messages['melding'];
+                            }
+                        } else {
+                            echo '<p>fant ingen medlinger i denne saken</p>';
+                        }
+                    '</div>';
+               echo '</div>';
                echo '</div>';
                echo '</div>';
                

@@ -102,6 +102,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             $mail->send();
 
+            header("location: ../../index.php");
         } else {
             echo "Error inserting content: " . $stmt_innhold->error;
         }
